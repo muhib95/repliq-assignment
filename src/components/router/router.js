@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Admin from "../Pages/Admin/Admin";
+import AdminCustomers from "../Pages/AdminCustomer/AdminCustomers";
 import CartView from "../Pages/CartView/CartView";
 import Home from "../Pages/Home/Home";
 import Layout from "../Pages/Layout/Layout";
@@ -29,7 +30,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/admin/customerslist",
-        element: <Admin></Admin>,
+        element: <AdminCustomers></AdminCustomers>,
       },
       {
         path: "/register",

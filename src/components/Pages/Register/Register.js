@@ -5,17 +5,29 @@ import { UserAuthContext } from "../../UserContext/UserContext";
 // import { Form } from "react-router-dom";
 
 const Register = () => {
-  const { user } = useContext(UserAuthContext);
+  const { setUpRecaptha } = useContext(UserAuthContext);
   const [value, setValue] = useState("");
+  const [error, setError] = useState("");
+  const [result, setResult] = useState("");
   const [flag, setFlag] = useState(false);
   const handleCancel = () => {
     setValue("");
   };
-  const getOtp = (e) => {
+  const getOtp = async (e) => {
     e.preventDefault();
-    setFlag(true);
+    console.log(value);
+    setError("");
+    if (value === "" || value === undefined)
+      return setError("Please enter a valid phone number!");
+    try {
+      const response = await setUpRecaptha(value);
+      setResult(response);
+      setFlag(true);
+    } catch (err) {
+      setError(err.message);
+    }
   };
-  console.log(user);
+  console.log(setUpRecaptha);
   return (
     <>
       <div className="flex justify-center mt-10">
@@ -27,6 +39,7 @@ const Register = () => {
             value={value}
             onChange={setValue}
           />
+          <div id="recaptcha-container"></div>
           <button
             type="submit"
             className="px-8 mr-3 py-3 font-semibold rounded dark:bg-lime-400 dark:text-gray-800"
