@@ -76,6 +76,16 @@ const Header = () => {
                     DashBoard
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    to="/admin/orderlist"
+                    aria-label="About us"
+                    title="About us"
+                    className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                  >
+                    OrderList
+                  </Link>
+                </li>
               </ul>
             </div>
             <ul className="flex items-center hidden space-x-8 lg:flex">
