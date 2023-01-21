@@ -18,7 +18,7 @@ const OrderList = () => {
       Date: "09/01/2023",
     },
   ];
-  console.log(orders);
+
   return (
     <div>
       <div className="overflow-x-auto">

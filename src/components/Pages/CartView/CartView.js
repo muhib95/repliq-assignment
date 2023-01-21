@@ -10,7 +10,6 @@ const CartView = () => {
 
     setProductds(l);
   };
-  console.log(products);
 
   return (
     <div className="flex justify-center">

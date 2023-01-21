@@ -1,33 +1,21 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
-import { UserAuthContext } from "../../UserContext/UserContext";
-// import { Form } from "react-router-dom";
 
 const Register = () => {
-  const { setUpRecaptha } = useContext(UserAuthContext);
+  //   const { setUpRecaptha } = useContext(UserAuthContext);
   const [value, setValue] = useState("");
-  const [error, setError] = useState("");
-  const [result, setResult] = useState("");
+
   const [flag, setFlag] = useState(false);
   const handleCancel = () => {
     setValue("");
   };
-  const getOtp = async (e) => {
+
+  const getOtp = (e) => {
     e.preventDefault();
-    console.log(value);
-    setError("");
-    if (value === "" || value === undefined)
-      return setError("Please enter a valid phone number!");
-    try {
-      const response = await setUpRecaptha(value);
-      setResult(response);
-      setFlag(true);
-    } catch (err) {
-      setError(err.message);
-    }
+    setFlag(true);
   };
-  console.log(setUpRecaptha);
+
   return (
     <>
       <div className="flex justify-center mt-10">

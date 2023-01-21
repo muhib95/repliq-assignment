@@ -1,40 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createContext } from "react";
-import {
-  getAuth,
-  onAuthStateChanged,
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import app from "../firebase/firebase.config";
 export const UserAuthContext = createContext();
 const auth = getAuth(app);
 
 const UserContext = ({ children }) => {
-  const [user, setUser] = useState({});
-
-  function setUpRecaptha(number) {
-    const recaptchaVerifier = new RecaptchaVerifier(
-      "recaptcha-container",
-      {},
-      auth
-    );
-    recaptchaVerifier.render();
-    return signInWithPhoneNumber(auth, number, recaptchaVerifier);
-  }
-
+  const [user, setUser] = useState(null);
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
-      console.log("Auth", currentuser);
-      setUser(currentuser);
+    const unRegister = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
     });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  const userInfo = { user, setUpRecaptha };
+    return () => unRegister();
+  });
+  const userInfo = { user };
   return (
     <UserAuthContext.Provider value={userInfo}>
       {children}
